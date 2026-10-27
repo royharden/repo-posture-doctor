@@ -72,3 +72,7 @@ Any item fails → **NO-GO**: S44 is skipped in execution and reported visibly; 
 **G1 decision:** _(GO / NO-GO — empty)_ · signed by INT and CR: _(empty)_ · date: _(empty)_
 
 G1 failure skips empirical execution and acceptance visibly; no easier corpus or selective rule withdrawal replaces it.
+
+
+## Codex succession — 2026-10-27
+The builder lineage now includes both Claude and Codex (S44-CODEX-INT 0867). Any earlier statement that the builder is Claude only, or a Codex CA is independent, is superseded. CA must be appointed by Roy outside both builder families/lineages; CR is separately appointed. Status: PENDING — needs Roy to appoint. No corpus or measurements are authorized by this note.
