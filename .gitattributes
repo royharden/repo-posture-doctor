@@ -1,0 +1,7 @@
+# Line endings: LF in the working tree for every text file, so the card digest in docs/RULES.md and other byte pins
+# survive core.autocrlf=true on Windows.
+* text=auto eol=lf
+
+# Byte pins (PLAN.md M0): never normalise these files.
+baselines/b1-vca13/** -text
+src/shared/vendored/** -text

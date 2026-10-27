@@ -1,0 +1,16 @@
+# [C] §4 layout
+corpus/.out/
+out/
+dist/
+dist-cli/
+node_modules/
+
+# Never commit real env files; .env.example (comment only) is tracked.
+.env
+.env.*
+!.env.example
+
+# Tool output
+*.tsbuildinfo
+coverage/
+*.log

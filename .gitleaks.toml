@@ -1,0 +1,16 @@
+# Repository self-scan config for gitleaks ([C] §2 decision 10). Used ONLY for the repo self-scan.
+# The B2 comparator run never uses this file: it scans a clean temp copy with gitleaks' default config ([C] §7.2).
+# Syntax is to be verified against the pinned gitleaks release at capture (docs/DEFERRED-VALIDATION.md).
+title = "repo-posture-doctor self-scan"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Only generated or third-party trees are excluded; whole source folders are never exempted."
+paths = [
+  # corpus/.out/: gitignored materialized corpus; synthetic fake secrets are joined from fragments here at eval time.
+  '''(^|/)corpus/\.out/''',
+  # node_modules/: installed third-party packages, not repo content.
+  '''(^|/)node_modules/''',
+]

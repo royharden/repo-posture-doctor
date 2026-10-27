@@ -1,0 +1,20 @@
+{
+  "//": "CLI build (npm run build:cli): src/core, src/cli and src/shared -> dist-cli/ (src/cli/main.ts -> dist-cli/cli/main.js, the package.json bin). Relative .ts import suffixes are rewritten to .js (TypeScript >= 5.7). Not yet run (Dirty Mode).",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": false,
+    "rewriteRelativeImportExtensions": true,
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist-cli",
+    "declaration": false,
+    "sourceMap": false,
+    "jsx": "preserve",
+    "types": ["node"]
+  },
+  "include": ["src/core/**/*.ts", "src/cli/**/*.ts", "src/shared/**/*.ts"],
+  "exclude": ["node_modules", "src/viewer", "**/*.test.ts"]
+}

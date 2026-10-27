@@ -1,0 +1,36 @@
+{
+  "//": "Typecheck-only config (npm run typecheck). Covers every TypeScript file in the repo, including the byte-for-byte #13 copies under baselines/ and the Deno shim. The CLI build uses tsconfig.cli.json. Not yet run (Dirty Mode; see docs/DEFERRED-VALIDATION.md).",
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["node", "vite/client"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "scripts/**/*.ts",
+    "test/**/*.ts",
+    "test/**/*.tsx",
+    "demo/**/*.ts",
+    "corpus/dev/**/*.ts",
+    "baselines/**/*.ts",
+    "baselines/b1-vca13/deno-shim.d.ts",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": ["node_modules", "dist", "dist-cli", "corpus/.out", "corpus/heldout", "out"]
+}
