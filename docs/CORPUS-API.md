@@ -206,3 +206,18 @@ S45 ([C] §10).
 S44 exports `generate(seed, split)` with the recipe metadata `{schemaVersion, groupId, ruleIds, licence, generatorSha}`. S44 consumes
 nothing from S45. **Held-out custody material is never exported before the one held-out attempt**; only cleared dev recipes may be
 exported earlier, and only on a separate grant.
+
+
+## Construction adapter hash convention (pending G0 confirmation)
+
+`scripts/corpus-io.ts` hashes sorted path/byte pairs using an 8-byte header per pair: unsigned big-endian 32-bit UTF-8 path
+length, then unsigned big-endian 32-bit payload length, then the UTF-8 normalized relative path and raw bytes. Case hashes
+use materialized bytes (base64 inputs are decoded). Generator hashing currently includes all permitted source-tree files.
+`corpus_sha256` hashes JSON of ordered `{case_id, files_sha256}` records; `labels_sha256` hashes JSON of the validated labels.
+CA must agree these exact canonicalizations at G0 before delivering any lock.
+
+**Open packaging seam:** a pure generator cannot simply hardcode a digest of the source tree that contains that same digest.
+The independent CA/CR must resolve non-self-referential generator attestation packaging during G0/R1; source-plus-detached
+metadata is a candidate, not an approved contract change. The present loader validates the returned manifest against actual
+source bytes and will refuse mismatches. No delivered corpus or successful materialization is claimed. Do not author a fake
+attestation or weaken this check to pass a placeholder. Reconcile the adapter to the agreed version before real evaluation.

@@ -1,0 +1,51 @@
+{
+  "commit": "fe0a10016ac8fef46d8fa66e080b03f087fad84d",
+  "files": [
+    {
+      "path": "supabase/functions/_shared/auditors/secrets.ts",
+      "sha256": "b9a4dc655074810eabd00a5de3bf2f61aa477f50160fe197d0718a58814f0e41",
+      "git_blob": "eafd0b7584a535d4f2c63ced668b77a8d45b28f7"
+    },
+    {
+      "path": "supabase/functions/_shared/auditors/auth.ts",
+      "sha256": "f564d7fe75cc8b6457c3d33f26045984cebecbd6d2c07bc68f480da2836e714a",
+      "git_blob": "f4d7f883e0029e633b3febb466f09c46f10b19d6"
+    },
+    {
+      "path": "supabase/functions/_shared/mask.ts",
+      "sha256": "c57a10598b191d590b6b5b3ac18b00e3045252766060425bbce81b0e560bdb8f",
+      "git_blob": "47c596e28f27a89aa1e4dcefd6ccda36c688ab22"
+    },
+    {
+      "path": "supabase/functions/_shared/fetch-target.ts",
+      "sha256": "17941a9ad0031a3f3966b8ffc676bb904b92017998117c9378b8153f14190d32",
+      "git_blob": "99349e3c8db61148bb03e71c9bcbe381e04f9ac1"
+    }
+  ],
+  "excerpts": [
+    {
+      "source": "supabase/functions/_shared/fetch-repo.ts",
+      "first": 3,
+      "last": 4,
+      "sha256": "a377039b20b9846d8e20dcc25c0c9d1f17763c202767fef91b315bae86538b57"
+    },
+    {
+      "source": "supabase/functions/_shared/fetch-repo.ts",
+      "first": 29,
+      "last": 46,
+      "sha256": "6a8feebb37d2c588a7709a867ffff592dfce43da715af2353dca14f2cbc1b45f"
+    },
+    {
+      "source": "supabase/functions/_shared/fetch-repo.ts",
+      "first": 71,
+      "last": 83,
+      "sha256": "16919f8dcf3a51ef9ee847edd8be7e7aa6f7d91e1701a97cfae32265a9415094"
+    },
+    {
+      "source": "supabase/functions/_shared/fetch-repo.ts",
+      "first": 99,
+      "last": 115,
+      "sha256": "44fdc2af151f65d5b4ee0c63d8e0a5e93082a32f26d1c70afd8d547c5c3925e1"
+    }
+  ]
+}

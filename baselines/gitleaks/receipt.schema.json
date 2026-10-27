@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "version", "binary_sha256", "default_config_sha256", "argv", "cwd", "platform", "exit_status", "corpus_sha256", "mapping_sha256", "raw_report_sha256", "sanitized_report_sha256", "redaction", "isolated_config", "command_verified"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "version": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "binary_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "default_config_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "argv": { "type": "array", "minItems": 8, "maxItems": 32, "items": { "type": "string", "maxLength": 2048 } },
+    "cwd": { "type": "string", "minLength": 1, "maxLength": 2048 },
+    "platform": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "exit_status": { "enum": [0, 1] },
+    "corpus_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "mapping_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "raw_report_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "sanitized_report_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "redaction": { "const": "100" },
+    "isolated_config": { "const": true },
+    "command_verified": { "const": true }
+  }
+}

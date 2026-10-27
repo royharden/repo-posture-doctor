@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "not yet measured",
+  "release": null,
+  "default_config_sha256": null,
+  "rules": {},
+  "partial_maps": ["secrets.secret_assignment", "secrets.service_role_jwt"],
+  "not_applicable": ["secrets.env_file_present", "secrets.public_prefixed_secret"],
+  "note": "Exact provider/JWT rule IDs must be verified from the pinned release default config at capture. No unverified ID is mapped. generic-api-key may map partially to secret_assignment after that check."
+}

@@ -1,0 +1,17 @@
+{
+  "openai_key": "secrets.provider_key",
+  "anthropic_key": "secrets.provider_key",
+  "aws_key": "secrets.provider_key",
+  "stripe_live_key": "secrets.provider_key",
+  "github_token": "secrets.provider_key",
+  "google_api_key": "secrets.provider_key",
+  "slack_token": "secrets.provider_key",
+  "private_key": "secrets.provider_key",
+  "service_role_jwt": "secrets.service_role_jwt",
+  "high_entropy_secret": "secrets.secret_assignment",
+  "committed_env_file": "secrets.env_file_present",
+  "public_secret_var": "secrets.public_prefixed_secret",
+  "rls_missing": "rls.table_rls_not_enabled",
+  "rls_using_true_update": "rls.literal_true_write_policy",
+  "rls_using_true_delete": "rls.literal_true_write_policy"
+}
