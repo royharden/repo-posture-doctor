@@ -1,0 +1,6 @@
+{
+  "entropy_threshold": 3.5,
+  "placeholders": ["your_", "changeme", "example", "placeholder"],
+  "provisional": true,
+  "to_be_chosen_on": "dev"
+}

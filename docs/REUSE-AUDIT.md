@@ -83,4 +83,4 @@ set (#5).
 
 ## [C] §8.1 seven-package trigger — assessment
 
-**Pending M1** (PLAN.md K31): M1 records the static, provisional assessment here; it is confirmed only when the P1 tests run (L1-16).
+**M1 static provisional assessment (2026-10-27).** Both rewritten paths are isolated pure-core implementations. Condition 1 does not fire: no backend/network/policy imports are needed. Condition 2 fires provisionally: both paths need new implementations around recorded provider data and JWT semantics; old maskKey was deliberately struck by K8. The original P1a/P1b split maps to disjoint M1 packages (shared safety/secrets boundary and RLS tracker), without changing frozen M0–M4 milestones (K31). A seventh-package condition is undetermined because vendored S26 tests have never run. No failure is inferred. More than 250 changed lines is an estimate warning only. Confirm after ROY-D3 with L1-16; runtime remains unverified.
