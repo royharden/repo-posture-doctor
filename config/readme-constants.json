@@ -1,0 +1,11 @@
+{
+  "schema_version": 2,
+  "design_phrases": [
+    "The offline scanner implements **12 literal rules** across secrets, Supabase migration RLS statements, test setup and\nobservability.",
+    "Import limit: **5 MiB**.",
+    "Node **24.18.0** is the declared development version.",
+    "Exit **0** means\ncomplete scope, **2** means input refused, **3** means incomplete coverage from caps or skipped entries.",
+    "Limits: **2,000 files**, **1 MiB per readable file**, **20 MiB total readable text**."
+  ],
+  "reason": "Only these exact design phrases approve their numbers outside the generated measurement block. Bare numeric values are never approved."
+}

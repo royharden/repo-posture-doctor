@@ -1,0 +1,32 @@
+import { useMemo, useRef, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import type { Report } from '../core/types.ts';
+import { importReport, MAX_REPORT_BYTES } from './importReport.ts';
+import illustrative from './demoReport.json';
+import { FindingsTable } from './FindingsTable.tsx';
+import { CoveragePanel } from './CoveragePanel.tsx';
+import { NotChecked } from './NotChecked.tsx';
+import { Results } from './Results.tsx';
+
+const example = importReport(JSON.stringify(illustrative));
+export function App(){
+  const [report,setReport]=useState<Report>(example),[isExample,setIsExample]=useState(true),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+  const [family,setFamily]=useState('all'),[state,setState]=useState('all'),[concern,setConcern]=useState('all'),[query,setQuery]=useState(''),[limit,setLimit]=useState(100);
+  const input=useRef<HTMLInputElement>(null);const request=useRef(0);
+  const resetFilters=()=>{setFamily('all');setState('all');setConcern('all');setQuery('');setLimit(100);};
+  const load=async(event:ChangeEvent<HTMLInputElement>)=>{
+    const file=event.target.files?.[0];if(!file)return;const token=++request.current;setBusy(true);setError('');
+    try{if(file.size>MAX_REPORT_BYTES)throw new Error('Choose a report.json no larger than 5 MiB.');const parsed=importReport(await file.text(),file.size);if(request.current===token){setReport(parsed);setIsExample(false);resetFilters();}}
+    catch(reason){if(request.current===token)setError(reason instanceof Error?reason.message:'The report could not be opened.');}
+    finally{if(request.current===token){setBusy(false);if(input.current)input.current.value='';}}
+  };
+  const filtered=useMemo(()=>{const search=query.toLowerCase();return report.results.filter(result=>(family==='all'||result.family===family)&&(state==='all'||result.state===state)&&(concern==='all'||concern==='yes'&&result.concern===true||concern==='no'&&result.concern===false||concern==='unknown'&&result.concern===null)&&(!search||[result.rule_id,result.subject,result.message,...result.evidence.map(pointer=>pointer.path)].some(value=>value.toLowerCase().includes(search))));},[report,family,state,concern,query]);
+  const onFilter=()=>setLimit(100);const concerns=report.results.filter(result=>result.concern===true).length;
+  return <><header className="site-header"><div className="brand"><span className="brand-mark" aria-hidden="true">↳</span><div>REPO POSTURE<span>LOCAL EVIDENCE / STATIC VIEWER</span></div></div><span className="offline-tag"><span className="dot"/>Browser-local report import</span></header>
+    <main><section className="hero"><div className="hero-copy"><div className="section-kicker">Look closer. Claim less.</div><h1>Know what the<br/><em>scan actually saw.</em></h1><p>Explore literal observations, source pointers and coverage boundaries. Absence of a finding is not proof of safety.</p></div><div className="import-card"><span className="file-icon" aria-hidden="true">{`{ }`}</span><h2>Open a local report</h2><p>Choose the <code>report.json</code> produced by the CLI. File contents stay in this browser session.</p><label className={`button primary ${busy?'disabled':''}`} htmlFor="report-file">{busy?'Reading report…':'Choose report.json'}<span aria-hidden="true">↗</span></label><input ref={input} id="report-file" type="file" accept=".json,application/json" onChange={load} disabled={busy} className="file-input"/><p className="small muted">Schema version 1 · Up to 5 MiB</p>{error&&<p className="error-message" role="alert">{error}</p>}</div></section>
+    <div className="mode-banner" role="status"><span className="chip">{isExample?'Illustrative example':'Imported report'}</span><p>{isExample?'Illustrative, not a scan output. Hand-authored from the demo scaffold’s intended observations.':'Showing your imported report. Its claims and provenance have not been independently verified by this viewer.'}</p>{!isExample&&<button type="button" className="text-button" onClick={()=>{request.current+=1;setReport(example);setIsExample(true);setError('');setBusy(false);resetFilters();}}>Show example</button>}</div>
+    <section className="report-heading"><div><div className="section-kicker">Current report</div><h2>{report.scope.root_label||'Unnamed root'}</h2><p className="muted">Tool {report.tool_version} · Rules {report.rules_version}</p></div><div className="report-count"><strong>{concerns}</strong><span>concerning<br/>observations</span></div></section>
+    <section className="panel observation-panel" aria-labelledby="observations-title"><div className="section-heading"><div><div className="section-kicker">Read the evidence</div><h2 id="observations-title">Observations</h2></div><span className="muted small">{filtered.length} of {report.results.length} outcomes</span></div><div className="filters"><label>Search<input type="search" placeholder="Rule, subject or source path" value={query} onChange={event=>{setQuery(event.target.value);onFilter();}}/></label><label>Family<select value={family} onChange={event=>{setFamily(event.target.value);onFilter();}}><option value="all">All families</option>{['secrets','rls','tests','obs'].map(value=><option value={value} key={value}>{value}</option>)}</select></label><label>State<select value={state} onChange={event=>{setState(event.target.value);onFilter();}}><option value="all">All states</option>{['flagged','present','absent_in_scope','unknown'].map(value=><option value={value} key={value}>{value.replaceAll('_',' ')}</option>)}</select></label><label>Concern<select value={concern} onChange={event=>{setConcern(event.target.value);onFilter();}}><option value="all">All outcomes</option><option value="yes">Concerning</option><option value="no">Not concerning</option><option value="unknown">Undetermined</option></select></label></div><p className="small muted filter-note">State describes what was observed. Concern describes whether that observation raises the rule’s literal concern.</p><FindingsTable results={filtered.slice(0,limit)}/>{filtered.length>limit&&<button className="button more-button" type="button" onClick={()=>setLimit(value=>value+100)}>Show the next {Math.min(100,filtered.length-limit)} outcomes</button>}</section>
+    <CoveragePanel scope={report.scope} results={report.results}/><NotChecked items={report.not_checked}/><Results/>
+    <footer>Evidence is bounded by the scanned scope.<span>Source construction only · Runtime unverified</span></footer></main></>;
+}

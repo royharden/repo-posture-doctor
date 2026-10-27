@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.1.0",
+  "rules_version": "v1.0-draft",
+  "scope": {
+    "root_label": "demo-only-never-evaluated",
+    "files_seen": 4,
+    "files_read": 4,
+    "metadata_only": 0,
+    "skipped": [],
+    "skipped_paths": [],
+    "denied": [],
+    "inventory_complete": true,
+    "content_complete": true,
+    "limits": {
+      "max_files": 2000,
+      "max_file_bytes": 1048576,
+      "max_total_bytes": 20971520
+    }
+  },
+  "results": [
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000001",
+      "rule_id": "secrets.provider_key",
+      "family": "secrets",
+      "subject": "src/index.ts:1:1-1:48",
+      "state": "flagged",
+      "concern": true,
+      "severity_hint": "medium",
+      "evidence": [
+        {
+          "kind": "file:line",
+          "path": "src/index.ts",
+          "line": 1,
+          "col": 1,
+          "endLine": 1,
+          "endCol": 48,
+          "excerpt": "const STRIPE_SECRET = \"sk_live_…[redacted 32 chars]\";"
+        }
+      ],
+      "message": "A listed provider format is present (illustrative observation).",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety."
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000002",
+      "rule_id": "secrets.service_role_jwt",
+      "family": "secrets",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": false,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "No matching evidence in the illustrative declared scope.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000003",
+      "rule_id": "secrets.secret_assignment",
+      "family": "secrets",
+      "subject": "src/index.ts:1:1-1:48",
+      "state": "flagged",
+      "concern": true,
+      "severity_hint": "medium",
+      "evidence": [
+        {
+          "kind": "file:line",
+          "path": "src/index.ts",
+          "line": 1,
+          "col": 1,
+          "endLine": 1,
+          "endCol": 48,
+          "excerpt": "const STRIPE_SECRET = \"sk_live_…[redacted 32 chars]\";"
+        }
+      ],
+      "message": "A secret-named literal meets the draft assignment rule (illustrative observation).",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety."
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000004",
+      "rule_id": "secrets.env_file_present",
+      "family": "secrets",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": false,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "No matching evidence in the illustrative declared scope.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000005",
+      "rule_id": "secrets.public_prefixed_secret",
+      "family": "secrets",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": false,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "No matching evidence in the illustrative declared scope.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000006",
+      "rule_id": "rls.table_rls_not_enabled",
+      "family": "rls",
+      "subject": "table:public.demo_entries",
+      "state": "flagged",
+      "concern": true,
+      "severity_hint": "medium",
+      "evidence": [
+        {
+          "kind": "file:line",
+          "path": "supabase/migrations/001_demo.sql",
+          "line": 1,
+          "col": 1,
+          "endLine": 1,
+          "endCol": 48,
+          "excerpt": "create table public.demo_entries (id integer);"
+        }
+      ],
+      "message": "A public table remains without literal RLS enablement in the illustrative migrations.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety."
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000007",
+      "rule_id": "rls.literal_true_write_policy",
+      "family": "rls",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": false,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "No matching evidence in the illustrative declared scope.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000008",
+      "rule_id": "tests.no_test_files",
+      "family": "tests",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": true,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "no test files found in 4 scanned paths (globs: declared test-file patterns)",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    },
+    {
+      "id": "0000000000000000000000000000000000000000000000000000000000000009",
+      "rule_id": "tests.no_test_script",
+      "family": "tests",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": true,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "No non-placeholder scripts.test found in the illustrative root package.json.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    },
+    {
+      "id": "000000000000000000000000000000000000000000000000000000000000000a",
+      "rule_id": "tests.runner_not_in_ci",
+      "family": "tests",
+      "subject": "root",
+      "state": "unknown",
+      "concern": null,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "GitHub Actions test execution could not be determined.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      },
+      "reason": "test_script_unavailable"
+    },
+    {
+      "id": "000000000000000000000000000000000000000000000000000000000000000b",
+      "rule_id": "obs.empty_catch",
+      "family": "obs",
+      "subject": "src/index.ts:2:1-2:48",
+      "state": "flagged",
+      "concern": true,
+      "severity_hint": "medium",
+      "evidence": [
+        {
+          "kind": "file:line",
+          "path": "src/index.ts",
+          "line": 2,
+          "col": 1,
+          "endLine": 2,
+          "endCol": 48,
+          "excerpt": "try { work(); } catch { /* demo: silent */ }"
+        }
+      ],
+      "message": "Catch block contains no statements in a non-test source file.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety."
+    },
+    {
+      "id": "000000000000000000000000000000000000000000000000000000000000000c",
+      "rule_id": "obs.no_logging_library",
+      "family": "obs",
+      "subject": "root",
+      "state": "absent_in_scope",
+      "concern": true,
+      "severity_hint": "info",
+      "evidence": [],
+      "message": "No listed logging library found in the illustrative manifests and source imports.",
+      "blind_spot": "Literal checks have documented limitations; absence of a finding is not proof of safety.",
+      "coverage": {
+        "required": [
+          "declared demo scope"
+        ],
+        "examined": 4,
+        "skipped": []
+      }
+    }
+  ],
+  "not_checked": [
+    {
+      "item": "Injection surface",
+      "why": "Deferred to a future version."
+    },
+    {
+      "item": "Health endpoints",
+      "why": "Not a literal rule in this version."
+    },
+    {
+      "item": "Supabase anon key",
+      "why": "Public by design."
+    },
+    {
+      "item": "Git history",
+      "why": "Only current folder contents are examined."
+    },
+    {
+      "item": "Dependency CVEs",
+      "why": "No dependency vulnerability database is consulted."
+    },
+    {
+      "item": "GitHub Actions risks (S25)",
+      "why": "Workflow test-command presence is the only CI rule."
+    },
+    {
+      "item": "Secret validity",
+      "why": "No generated or discovered value is sent to a provider."
+    },
+    {
+      "item": "RLS effectiveness",
+      "why": "Literal migration statements do not establish effective access control."
+    },
+    {
+      "item": "New sb_secret_ keys",
+      "why": "This format is not a listed provider rule."
+    }
+  ]
+}

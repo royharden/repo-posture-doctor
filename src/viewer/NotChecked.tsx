@@ -1,0 +1,2 @@
+import type { Report } from '../core/types.ts';
+export function NotChecked({items}:{items:Report['not_checked']}) { return <section className="panel" aria-labelledby="not-checked-title"><div className="section-kicker">The boundary matters</div><h2 id="not-checked-title">Not checked</h2><div className="not-checked-grid">{items.map((item,index)=><div key={index}><h3>{item.item}</h3><p>{item.why}</p></div>)}</div></section>; }

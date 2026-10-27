@@ -46,3 +46,19 @@ or until the named gate. Each milestone appends what it defers. Commands run fro
   dev-mode inline preamble and HMR socket. M4 decides whether to add a CSP to the production build only; verify in L1-8.
 - `tsconfig.cli.json` compiles with `resolveJsonModule` under `NodeNext`; if M1 imports `config/rules.json` directly it needs an
   import attribute (`with { type: 'json' }`) or a runtime read in `src/cli/`. Verify in L1-5.
+
+
+## Codex source continuation (M1–M4)
+
+- All scanner, walker, rule, scorer, guard, baseline, demo and viewer checks remain source-only. Static syntax passing is not typecheck or runtime evidence.
+- After ROY-D3, exercise portable mocked walker controls, real Windows junction/name-surrogate behavior and changed-file handling (`npm test -- cli-walk m1-review-regressions`).
+- Exercise conservative workflow structural controls and source parse-failure path abstentions (`npm test -- m2-review-regressions m2-rules`).
+- Validate materialization hashes using the documented length-prefixed path/byte convention and reconcile CA manifest counts against actual labels (`npm run materialize -- --split dev --check`).
+- Independent appointment must be outside both Claude and Codex builder lineages. No generator or label has been written by this construction team.
+- Before future dev evaluation, Roy-appointed CA/CR admission is represented by `results/ADMISSION.json` with `schema_version:1`, `g0:GO`, `g1:GO` for held-out, named `ca`, `cr`, and `appointed_by:Roy`. This file is absent; prose templates do not fabricate admission.
+- B2 activation still requires authorized binary/release selection and actual capture implementation/verification, exact mapping IDs, config/corpus hashes, isolated redacted capture and receipt. The source adapter validates/imports captures; the capture entrypoint currently refuses execution. No B2 measurement can be inferred.
+- Final runtime phase must generate and leak-check reviewed F1–F14 adjudication counts and the README measurement block from results.jsonl. Construction leaves these counts not yet measured.
+
+- Allowed scope cut (PLAN §5 cut order): interactive viewer results page is deferred; `Results.tsx` honestly displays not yet measured, and generated README/result tables remain the measurement surface. No rule or independence gate is cut.
+
+- G0/R1 packaging seam: independent CA/CR must agree a non-self-referential generator source attestation scheme and canonical pair hashes, then builder reconciles loader to that version. A hardcoded generatorSha inside its own hashed source cannot be assumed to work. Current loader refuses mismatches; no corpus/materialization success is claimed.
