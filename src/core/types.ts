@@ -18,7 +18,7 @@ export interface RuleResult {
   severity_hint: 'high' | 'medium' | 'low' | 'info'; evidence: Pointer[]; message: string; blind_spot: string;
   coverage?: Coverage; reason?: string; id: string;
 }
-export type RuleDraft = Omit<RuleResult, 'id'> & { id?: string };
+export type RuleDraft = Omit<RuleResult, 'id'> & { id?: string; unknown_paths?: string[] };
 export interface RuleConfig { entropy_threshold: number; placeholders: string[]; provisional: boolean; to_be_chosen_on: string }
 export interface Rule { id: string; evaluate: (snapshot: RepoSnapshot, config: RuleConfig) => RuleDraft[] }
 export interface Report {

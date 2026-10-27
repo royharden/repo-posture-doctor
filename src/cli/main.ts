@@ -6,6 +6,9 @@ import { walk, validateOutput, InputRefused } from './walk.ts';
 import { scan } from '../core/scan.ts';
 import { parseConfig } from '../core/config.ts';
 import { serializeReport } from '../core/report/json.ts';
+import { renderMarkdown } from '../core/report/md.ts';
+import { assertNoLeaks } from '../core/leakGuard.ts';
+import { detectedSecretValues } from '../core/rules/secrets/index.ts';
 import { toSafe } from '../core/safe.ts';
 
 export const HELP = 'posture-doctor scan <root> [--out <new-dir>]\nStatic evidence in the scanned scope; absence of a finding is not proof of safety.\nReads a quiescent local folder only. No network, key validation or git history.\nExit: 0 complete; 2 input refused; 3 coverage incomplete (cap or skipped entry).';
@@ -23,10 +26,13 @@ export async function main(args = process.argv.slice(2)): Promise<number> {
     const report = scan(snapshot, undefined, config);
     // Core scan sanitizes all strings and detected-value occurrences before serialization.
     const json = serializeReport(report);
+    const markdown = renderMarkdown(report);
+    assertNoLeaks([json, markdown], [], detectedSecretValues(snapshot, config));
     if (output) {
       // Exclusive creation prevents overwriting an existing output or a competing invocation.
       await mkdir(output);
       await writeFile(resolve(output, 'report.json'), json, { encoding: 'utf8', flag: 'wx' });
+      await writeFile(resolve(output, 'report.md'), markdown, { encoding: 'utf8', flag: 'wx' });
       console.log(toSafe(`Report written. ${report.results.filter(r=>r.concern === true).length} concerning observations; ${report.scope.files_seen} paths inventoried.`));
     } else {
       console.log(toSafe(`Static evidence: ${report.scope.files_seen} paths inventoried; ${report.results.filter(r=>r.concern === true).length} concerning observations.`));
