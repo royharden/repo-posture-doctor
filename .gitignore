@@ -14,3 +14,15 @@ node_modules/
 *.tsbuildinfo
 coverage/
 *.log
+
+# Keep local credentials, private keys, archives and generated output out of Git.
+.creds/
+ArchiveManager-creds.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.zip
+.cache/
+.pytest_cache/
+.ruff_cache/
